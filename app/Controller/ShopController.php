@@ -32,7 +32,7 @@ class ShopController extends Controller {
     }
 
     public function products(): void {
-        $category = $_GET['category'] ?? null;
+        $category = $_GET['category'] ?? $_POST['category'] ?? null;
 
         if ($category) {
             $products = $this->products->filterByCategory($category);

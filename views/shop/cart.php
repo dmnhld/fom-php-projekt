@@ -1,6 +1,6 @@
 <?php if (!empty($items) && isset($products) && isset($categories)): ?>
-    <table>
-        <tr>
+    <table id="cart">
+        <tr style="text-align: left;">
             <th>Produkt</th>
             <th>Kategorie</th>
             <th>Preis</th>
@@ -9,7 +9,7 @@
         </tr>
         <?php $totalPrice = 0; foreach ($items as $item): ?>
             <tr>
-                <td><?= $products[$item['product']]['name'] ?></td>
+                <td><a href="?controller=shop&action=product&id=<?= $products[$item['product']]['id'] ?>"><?= $products[$item['product']]['name'] ?></a></td>
                 <td><?= $categories[$products[$item['product']]['category']] ?></td>
                 <td><?= $products[$item['product']]['price'] ?>€</td>
                 <td>

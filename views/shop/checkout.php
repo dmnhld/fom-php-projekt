@@ -1,7 +1,7 @@
 <?php if (!empty($items) && isset($products) && isset($categories)): ?>
     <h1>Vielen Dank für Ihre Bestellung</h1>
     <p>Sie haben folgendes bestellt:</p>
-    <table>
+    <table id="cart">
         <tr>
             <th>Produkt</th>
             <th>Kategorie</th>

@@ -15,6 +15,19 @@ class Cart extends Model {
     }
 
     public function create($user, $product, $amount): bool{
+        // check if item already exists with same user and product
+        $sql = "SELECT * FROM {$this->table} WHERE user = ? AND product = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('ii', $user, $product);
+        $stmt->execute();
+
+        if ($stmt->get_result()->num_rows > 0) {
+            $sql = "UPDATE {$this->table} SET amount = amount + ? WHERE user = ? AND product = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bind_param('iii', $amount, $user, $product);
+            return $stmt->execute();
+        }
+
         $sql = "INSERT INTO {$this->table} (user, product, amount) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('iii', $user, $product, $amount);
